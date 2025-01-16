@@ -1,6 +1,7 @@
 ### Python template
 
 deploy/
+mounts/
 .idea/
 .vscode/
 .git/

@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./deploy/docker/src/Dockerfile
+    command: >
+      sh -c "uvicorn web.application:get_app --host 0.0.0.0 --port 8000 --reload"
+    image: unibot:dev
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./src:/src
+      - ./mounts/src/logs:/src/logs
+      - ./mounts/src/static:/src/static
+      - ./mounts/src/media:/src/media
+    ports:
+      - "8000:8000"
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./deploy/docker/postgres/Dockerfile
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./mounts/postgres_data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - ${DB_PORT}:5432
+
+  migrator:
+    image: unibot:dev
+    restart: "no"
+    command: alembic upgrade head
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - api
+
+  redis:
+    build:
+      context: .
+      dockerfile: ./deploy/docker/redis/Dockerfile
+    hostname: redis
+    restart: always
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    expose:
+      - 6379
+
+
