@@ -5,9 +5,9 @@ from alembic import context
 from sqlalchemy.ext.asyncio.engine import create_async_engine
 from sqlalchemy.future import Connection
 
-from src.db.meta import meta
-from src.db.models import load_all_models
-from src.settings import settings
+from db.meta import meta
+from db.models import load_all_models
+from settings import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

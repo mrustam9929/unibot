@@ -16,10 +16,11 @@ class Settings(BaseSettings):
     reload: bool = False
     environment: str = "dev"
 
-    db_host: str = "localhost"
-    db_port: int = 5432
-    db_user: str = "postgres"
-    db_pass: str = "postgres"
+    db_host: str
+    db_port: int
+    db_user: str
+    db_pass: str
+    db_name: str
 
     redis_host: str = "redis"
     redis_port: int = 6379
@@ -38,7 +39,8 @@ class Settings(BaseSettings):
             host=self.db_host,
             port=self.db_port,
             user=self.db_user,
-            password=self.db_pass
+            password=self.db_pass,
+            path=f"/{self.db_name}"
         )
 
     @property
