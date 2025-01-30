@@ -11,6 +11,8 @@ TEMP_DIR = Path(gettempdir())
 
 
 class Settings(BaseSettings):
+    main_bot_token: str
+
     host: str = "127.0.0.1"
     port: int = 8000
     reload: bool = False

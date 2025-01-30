@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./deploy/docker/postgres/Dockerfile
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - bot_pg_data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - ${DB_PORT}:5432
+
+  redis:
+    build:
+      context: .
+      dockerfile: ./deploy/docker/redis/Dockerfile
+    hostname: redis
+    restart: always
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - redis_data:/data
+    expose:
+      - 6379
+
+volumes:
+  bot_pg_data:
+  redis_data:

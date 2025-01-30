@@ -2,6 +2,9 @@
 
 deploy/
 mounts/
+src/logs/
+src/media/
+src/static/
 .idea/
 .vscode/
 .git/

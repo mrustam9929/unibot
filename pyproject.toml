@@ -44,6 +44,7 @@ taskiq = "^0"
 taskiq-fastapi = "^0"
 taskiq-redis = "^0"
 taskiq-aio-pika = "^0"
+aiogram = "^3.17.0"
 
 
 [tool.poetry.dev-dependencies]
