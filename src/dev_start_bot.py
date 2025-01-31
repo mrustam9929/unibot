@@ -1,10 +1,12 @@
 import asyncio
 
-from bots.main.bot import dp, bot
+from bots.main.bot import bot
+
+from bots.main.dispatcher import dispatcher
 
 
 async def main() -> None:
-    await dp.start_polling(bot)
+    await dispatcher.start_polling(bot)
 
 
 if __name__ == "__main__":

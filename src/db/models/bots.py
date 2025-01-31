@@ -10,15 +10,15 @@ class Bot(Base):
     is_active = Column(Boolean, default=True)
 
 
-class Module(Base):
-    __tablename__ = 'modules'
-    id = Column(BigInteger, primary_key=True)
-    name = Column(String, unique=True)
-    description = Column(String)
-
-
-class BotModule(Base):
-    __tablename__ = 'bot_modules'
-    id = Column(BigInteger, primary_key=True)
-    bot_id = Column(Integer, ForeignKey('bots.id'))
-    function_id = Column(Integer, ForeignKey('modules.id'))
+# class Module(Base):
+#     __tablename__ = 'modules'
+#     id = Column(BigInteger, primary_key=True)
+#     name = Column(String, unique=True)
+#     description = Column(String)
+#
+#
+# class BotModule(Base):
+#     __tablename__ = 'bot_modules'
+#     id = Column(BigInteger, primary_key=True)
+#     bot_id = Column(Integer, ForeignKey('bots.id'))
+#     function_id = Column(Integer, ForeignKey('modules.id'))
